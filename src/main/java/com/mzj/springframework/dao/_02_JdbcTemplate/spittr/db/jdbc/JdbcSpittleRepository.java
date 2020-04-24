@@ -8,15 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.mzj.springframework.dao._02_JdbcTemplate.spittr.db.SpittleRepository;
+import com.mzj.springframework.dao._02_JdbcTemplate.spittr.domain.Spitter;
 import com.mzj.springframework.dao._02_JdbcTemplate.spittr.domain.Spittle;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-
-import spittr.db.SpittleRepository;
-import spittr.domain.Spitter;
-import spittr.domain.Spittle;
 
 public class JdbcSpittleRepository implements SpittleRepository {
 
@@ -32,7 +29,7 @@ public class JdbcSpittleRepository implements SpittleRepository {
 	}
 
 	public long count() {
-		return jdbcTemplate.queryForLong("select count(id) from Spittle");
+		return jdbcTemplate.queryForObject("select count(id) from Spittle",Long.class);
 	}
 
 	public List<Spittle> findRecent() {

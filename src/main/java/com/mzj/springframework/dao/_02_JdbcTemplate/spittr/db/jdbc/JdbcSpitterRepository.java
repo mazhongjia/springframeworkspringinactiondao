@@ -21,7 +21,7 @@ public class JdbcSpitterRepository implements SpitterRepository {
 	}
 
 	public long count() {
-		return jdbcTemplate.qqueryForLong("select count(id) from Spitter");
+		return jdbcTemplate.queryForObject("select count(id) from Spitter",Long.class);
 	}
 
 	public Spitter save(Spitter spitter) {
