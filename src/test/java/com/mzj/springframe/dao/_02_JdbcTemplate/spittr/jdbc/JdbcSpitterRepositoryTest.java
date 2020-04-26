@@ -30,6 +30,7 @@ public class JdbcSpitterRepositoryTest {
   @Transactional
   public void findAll() {
     List<Spitter> spitters = spitterRepository.findAll();
+    System.out.println(spitters);
     assertEquals(4, spitters.size());
     assertSpitter(0, spitters.get(0));
     assertSpitter(1, spitters.get(1));

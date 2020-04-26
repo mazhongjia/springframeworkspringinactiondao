@@ -1,5 +1,6 @@
-package com.mzj.springframework.dao._01_dataSource;
+package com.mzj.springframework.dao._01_dataSource._01_JNDI;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,26 +19,13 @@ import javax.sql.DataSource;
 public class DataSourceConfiguration {
 
     /**
-     * 开发数据源
+     * jndi的数据源
      *
      * @return
      */
-    @Profile("development")
     @Bean
-    public DataSource embeddedDataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript("classpath:schema.sql")
-                .addScript("classpath:test-data.sql")
-                .build();
-    }
-
-    /**
-     * 生成环境的数据源
-     *
-     * @return
-     */
     public DataSource dataSource() {
+
         JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();
         jndiObjectFactoryBean.setJndiName("jdbc/SpittrDS");
         jndiObjectFactoryBean.setResourceRef(true);

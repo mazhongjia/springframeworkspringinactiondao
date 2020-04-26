@@ -17,6 +17,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class JdbcConfig {
 
+  /**
+   * 数据源bean（这里是测试数据源（嵌入式数据源））
+   * @return
+   */
   @Bean
   public DataSource dataSource() {
     return new EmbeddedDatabaseBuilder()
@@ -24,17 +28,32 @@ public class JdbcConfig {
       .addScripts("classpath:spittr/db/jdbc/schema.sql", "classpath:spittr/db/jdbc/test-data.sql")
       .build();
   }
-  
+
+  /**
+   * JdbcTemplate bean，依赖【数据源bean】
+   * @param dataSource
+   * @return
+   */
   @Bean
   public JdbcTemplate jdbcTemplate(DataSource dataSource) {
     return new JdbcTemplate(dataSource);
   }
-  
+
+  /**
+   * Repository1 bean（DAO），依赖JdbcTemplate
+   * @param jdbcTemplate
+   * @return
+   */
   @Bean
   public SpitterRepository spitterRepository(JdbcTemplate jdbcTemplate) {
     return new JdbcSpitterRepository(jdbcTemplate);
   }
 
+  /**
+   * Repository2 bean（DAO），依赖JdbcTemplate
+   * @param jdbcTemplate
+   * @return
+   */
   @Bean
   public SpittleRepository spittleRepository(JdbcTemplate jdbcTemplate) {
     return new JdbcSpittleRepository(jdbcTemplate);
