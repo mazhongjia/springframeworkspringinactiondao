@@ -3,7 +3,6 @@ package com.mzj.springframework.dao._01_dataSource._02_dataSourcePool.DBCP;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jndi.JndiObjectFactoryBean;
 
 import javax.sql.DataSource;
 
